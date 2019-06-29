@@ -28,11 +28,11 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
-	server := grpc.NewServer()
-	calculatorpb.RegisterCalculatorServiceServer(server, &CalculatorServer{})
+	calculatorServer := grpc.NewServer()
+	calculatorpb.RegisterCalculatorServiceServer(calculatorServer, &CalculatorServer{})
 
 	log.Println("Serving in 0.0.0.0:5000")
-	if err := server.Serve(listener); err != nil {
-		log.Fatalf("Failed to server: %v", err)
+	if err := calculatorServer.Serve(listener); err != nil {
+		log.Fatalf("Failed to calculatorServer: %v", err)
 	}
 }
