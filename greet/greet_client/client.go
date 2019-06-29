@@ -29,13 +29,13 @@ func doClientStreaming(client greetpb.GreetServiceClient) {
 	log.Println("Starting to do a Client Streaming RPC...")
 
 	requests := []*greetpb.LongGreetRequest{
-		&greetpb.LongGreetRequest{
+		{
 			Greeting: &greetpb.Greeting{
 				FirstName: "Giselle",
 				LastName:  "Piasetzki",
 			},
 		},
-		&greetpb.LongGreetRequest{
+		{
 			Greeting: &greetpb.Greeting{
 				FirstName: "Vinicios",
 				LastName:  "Wentz",
