@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"google.golang.org/grpc"
-	"grpc-training/greet/greetpb"
+	greetpb2 "grpc-training/unary/greet/greetpb"
 	"log"
 	"net"
 )
@@ -16,9 +16,10 @@ const (
 
 type Server struct{}
 
-func (*Server) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
+func (*Server) Greet(ctx context.Context, req *greetpb2.GreetRequest) (*greetpb2.GreetResponse, error) {
+	log.Printf("Greet function was invoked with: %v\n", req)
 	firstName := req.GetGreeting().GetFirstName()
-	response := &greetpb.GreetResponse{
+	response := &greetpb2.GreetResponse{
 		Result: "Hello " + firstName,
 	}
 	return response, nil
@@ -31,7 +32,7 @@ func main() {
 	}
 
 	server := grpc.NewServer()
-	greetpb.RegisterGreetServiceServer(server, &Server{})
+	greetpb2.RegisterGreetServiceServer(server, &Server{})
 
 	fmt.Println("Serving in 0.0.0.0:5000")
 	if err := server.Serve(listener); err != nil {
