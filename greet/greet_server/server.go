@@ -4,6 +4,7 @@ import (
 	"context"
 	"google.golang.org/grpc"
 	"grpc-training/greet/greetpb"
+	"io"
 	"log"
 	"net"
 	"strconv"
@@ -19,7 +20,7 @@ func NewGreetServer(network string, address string) *GreetServer {
 	return &GreetServer{Network: network, Address: address}
 }
 
-func (s *GreetServer) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
+func (*GreetServer) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
 	log.Printf("Greet function was invoked with: %v\n", req)
 	firstName := req.GetGreeting().GetFirstName()
 	response := &greetpb.GreetResponse{
@@ -28,7 +29,7 @@ func (s *GreetServer) Greet(ctx context.Context, req *greetpb.GreetRequest) (*gr
 	return response, nil
 }
 
-func (s *GreetServer) GreetManyTimes(request *greetpb.GreetManyTimesRequest, stream greetpb.GreetService_GreetManyTimesServer) error {
+func (*GreetServer) GreetManyTimes(request *greetpb.GreetManyTimesRequest, stream greetpb.GreetService_GreetManyTimesServer) error {
 	log.Printf("GreetManyTimes function was invoked with: %v\n", request)
 	firstName := request.GetGreeting().GetFirstName()
 	for i := 0; i < 10; i++ {
@@ -41,6 +42,27 @@ func (s *GreetServer) GreetManyTimes(request *greetpb.GreetManyTimesRequest, str
 		time.Sleep(time.Second)
 	}
 	return nil
+}
+
+func (greetServer *GreetServer) LongGreet(stream greetpb.GreetService_LongGreetServer) error {
+	log.Println("LongGreet function was invoked with a streaming request")
+
+	var result string
+	for {
+		request, err := stream.Recv()
+
+		if err == io.EOF {
+			return stream.SendAndClose(&greetpb.LongGreetResponse{
+				Result: result,
+			})
+		}
+
+		if err != nil {
+			log.Fatalf("Error while reading client stream: %v", err)
+		}
+
+		result = "Hello, " + request.GetGreeting().GetFirstName() + " !"
+	}
 }
 
 func main() {
