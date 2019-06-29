@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"google.golang.org/grpc"
-	"grpc-training/unary/greet/greetpb"
+	"grpc-training/greet/greetpb"
 	"log"
 	"net"
 	"strconv"
@@ -13,6 +13,10 @@ import (
 type GreetServer struct {
 	Network string
 	Address string
+}
+
+func NewGreetServer(network string, address string) *GreetServer {
+	return &GreetServer{Network: network, Address: address}
 }
 
 func (s *GreetServer) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
@@ -26,7 +30,6 @@ func (s *GreetServer) Greet(ctx context.Context, req *greetpb.GreetRequest) (*gr
 
 func (s *GreetServer) GreetManyTimes(request *greetpb.GreetManyTimesRequest, stream greetpb.GreetService_GreetManyTimesServer) error {
 	log.Printf("GreetManyTimes function was invoked with: %v\n", request)
-
 	firstName := request.GetGreeting().GetFirstName()
 	for i := 0; i < 10; i++ {
 		result := "Hello " + firstName + " number " + strconv.Itoa(i)
@@ -37,15 +40,11 @@ func (s *GreetServer) GreetManyTimes(request *greetpb.GreetManyTimesRequest, str
 		}
 		time.Sleep(time.Second)
 	}
-
 	return nil
 }
 
 func main() {
-	greetServer := GreetServer{
-		Network: "tcp",
-		Address: "0.0.0.0:50051",
-	}
+	greetServer := NewGreetServer("tcp", "0.0.0.0:50051")
 
 	listener, err := net.Listen(greetServer.Network, greetServer.Address)
 	if err != nil {
@@ -53,7 +52,7 @@ func main() {
 	}
 
 	server := grpc.NewServer()
-	greetpb.RegisterGreetServiceServer(server, &greetServer)
+	greetpb.RegisterGreetServiceServer(server, greetServer)
 
 	log.Println("Serving in 0.0.0.0:5000")
 	if err := server.Serve(listener); err != nil {

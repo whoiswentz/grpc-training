@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"google.golang.org/grpc"
-	"grpc-training/unary/greet/greetpb"
+	"grpc-training/greet/greetpb"
 	"io"
 	"log"
 )
@@ -44,7 +44,7 @@ func doServerStreaming(client greetpb.GreetServiceClient) {
 			break
 		}
 		if err != nil {
-			log.Fatalf("error while reading the stream: %v", err)
+			log.Fatalf("error while reading the server-stream: %v", err)
 		}
 		log.Printf("Response from GreetManyTimes: %v", message.GetResult())
 	}
