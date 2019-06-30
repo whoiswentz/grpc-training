@@ -38,9 +38,10 @@ func (*CalculatorServer) PrimeNumberDecomposition(request *calculatorpb.PrimeNum
 
 	for number > 2 {
 		if number%divisor == 0 {
-			_ = stream.Send(&calculatorpb.PrimeNumberDecompositionResponse{
-				PrimeFactor: divisor,
-			})
+			if err := stream.Send(&calculatorpb.PrimeNumberDecompositionResponse{PrimeFactor: divisor}); err != nil {
+				log.Fatalf("Error while seding data do server: %v", err)
+				return err
+			}
 			number /= divisor
 		} else {
 			divisor += 1
@@ -71,6 +72,31 @@ func (*CalculatorServer) ComputeAverage(stream calculatorpb.CalculatorService_Co
 		count += 1
 	}
 
+}
+
+func (*CalculatorServer) FindMaximum(stream calculatorpb.CalculatorService_FindMaximumServer) error {
+	log.Println("Received FindMaximum RPC")
+
+	maximum := int32(0)
+
+	for {
+		request, err := stream.Recv()
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			log.Fatalf("Error while reading client stream: %v", err)
+			return err
+		}
+
+		if number := request.GetNumber(); number > maximum {
+			maximum = number
+			if err := stream.Send(&calculatorpb.FindMaximumResponse{Result: number}); err != nil {
+				log.Fatalf("Error while sending data to client %v", err)
+				return err
+			}
+		}
+	}
 }
 
 func main() {

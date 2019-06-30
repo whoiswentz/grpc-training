@@ -6,6 +6,7 @@ import (
 	"grpc-training/calculator/calculatorpb"
 	"io"
 	"log"
+	"time"
 )
 
 const target = "localhost:50051"
@@ -21,7 +22,46 @@ func main() {
 
 	//doUnary(client)
 	//doServerStreaming(client)
-	doClientStreaming(client)
+	//doClientStreaming(client)
+	_ = doBiDiStreaming(client)
+}
+
+func doBiDiStreaming(client calculatorpb.CalculatorServiceClient) error {
+	log.Println("Starting FindMaximum Bidirectional Streaming RPC...")
+
+	if stream, err := client.FindMaximum(context.Background()); err != nil {
+		log.Fatalf("Error while opening stream an calling FindMaximum: %v\n", err)
+		return err
+	} else {
+		waitChannel := make(chan struct{})
+
+		go func() {
+			numbers := []int32{13, 200, 31, 4, 1, 1, 70, 2}
+			for _, number := range numbers {
+				stream.Send(&calculatorpb.FindMaximumRequest{Number: number})
+				time.Sleep(time.Second)
+			}
+			stream.CloseSend()
+		}()
+
+		go func() {
+			for {
+				if response, err := stream.Recv(); err == io.EOF {
+					break
+				} else if err != nil {
+					log.Fatalf("Problem while reading the server stream: %v\n", err)
+					break
+				} else {
+					maximum := response.GetResult()
+					log.Printf("Received a new maximum: %v\n", maximum)
+				}
+			}
+			close(waitChannel)
+		}()
+
+		<-waitChannel
+	}
+	return nil
 }
 
 func doClientStreaming(client calculatorpb.CalculatorServiceClient) {
