@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/status"
 	"grpc-training/calculator/calculatorpb"
 	"io"
 	"log"
@@ -23,7 +25,34 @@ func main() {
 	//doUnary(client)
 	//doServerStreaming(client)
 	//doClientStreaming(client)
-	_ = doBiDiStreaming(client)
+	//_ = doBiDiStreaming(client)
+	doErrorUnarySquareRoot(client)
+}
+
+func doErrorUnarySquareRoot(client calculatorpb.CalculatorServiceClient) {
+	log.Println("Starting SquareRoot unary RPC...")
+
+	calculatorResponse := &calculatorpb.SquareRootRequest{Number: 10}
+
+	doErrorCall(client, calculatorResponse)
+
+	calculatorResponse = &calculatorpb.SquareRootRequest{Number: -10}
+
+	doErrorCall(client, calculatorResponse)
+}
+
+func doErrorCall(client calculatorpb.CalculatorServiceClient, calculatorResponse *calculatorpb.SquareRootRequest) {
+	response, err := client.SquareRoot(context.Background(), calculatorResponse)
+
+	if err != nil {
+		responseError, ok := status.FromError(err)
+		if ok {
+			log.Fatalf("%v: %v\n", responseError.Message(), responseError.Code())
+		} else {
+			log.Fatalf("Error calling SquareRoot: %v\n", err)
+		}
+	}
+	fmt.Printf("Result of square root of: %v: %v\n", calculatorResponse.GetNumber(), response.GetNumberRoot())
 }
 
 func doBiDiStreaming(client calculatorpb.CalculatorServiceClient) error {
