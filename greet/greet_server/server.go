@@ -4,6 +4,7 @@ import (
 	"context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/status"
 	"grpc-training/greet/greetpb"
 	"io"
@@ -18,25 +19,35 @@ type GreetServer struct {
 	Address string
 }
 
-func NewGreetServer(network string, address string) *GreetServer {
-	return &GreetServer{Network: network, Address: address}
-}
-
 func main() {
-	greetServer := NewGreetServer("tcp", "0.0.0.0:50051")
 
+	crtFile := "ssl/server.crt"
+	pemFile := "ssl/server.pem"
+
+	creds, sslErr := credentials.NewServerTLSFromFile(crtFile, pemFile)
+	if sslErr != nil {
+		log.Fatalf("Failed loading certificates: %v", sslErr)
+		return
+	}
+
+	greetServer := NewGreetServer("tcp", "0.0.0.0:50051")
 	listener, err := net.Listen(greetServer.Network, greetServer.Address)
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
-	server := grpc.NewServer()
+	opts := grpc.Creds(creds)
+	server := grpc.NewServer(opts)
 	greetpb.RegisterGreetServiceServer(server, greetServer)
 
 	log.Println("Serving in 0.0.0.0:5000")
 	if err := server.Serve(listener); err != nil {
 		log.Fatalf("Failed to server: %v", err)
 	}
+}
+
+func NewGreetServer(network string, address string) *GreetServer {
+	return &GreetServer{Network: network, Address: address}
 }
 
 func (*GreetServer) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {

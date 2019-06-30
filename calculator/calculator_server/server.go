@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 	"grpc-training/calculator/calculatorpb"
 	"io"
@@ -121,6 +122,8 @@ func main() {
 
 	calculatorServer := grpc.NewServer()
 	calculatorpb.RegisterCalculatorServiceServer(calculatorServer, &CalculatorServer{})
+
+	reflection.Register(calculatorServer)
 
 	log.Println("Serving in 0.0.0.0:5000")
 	if err := calculatorServer.Serve(listener); err != nil {
