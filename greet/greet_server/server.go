@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 	"grpc-training/greet/greetpb"
 	"io"
 	"log"
@@ -20,10 +22,45 @@ func NewGreetServer(network string, address string) *GreetServer {
 	return &GreetServer{Network: network, Address: address}
 }
 
+func main() {
+	greetServer := NewGreetServer("tcp", "0.0.0.0:50051")
+
+	listener, err := net.Listen(greetServer.Network, greetServer.Address)
+	if err != nil {
+		log.Fatalf("Failed to listen: %v", err)
+	}
+
+	server := grpc.NewServer()
+	greetpb.RegisterGreetServiceServer(server, greetServer)
+
+	log.Println("Serving in 0.0.0.0:5000")
+	if err := server.Serve(listener); err != nil {
+		log.Fatalf("Failed to server: %v", err)
+	}
+}
+
 func (*GreetServer) Greet(ctx context.Context, req *greetpb.GreetRequest) (*greetpb.GreetResponse, error) {
 	log.Printf("Greet function was invoked with: %v\n", req)
 	firstName := req.GetGreeting().GetFirstName()
 	response := &greetpb.GreetResponse{
+		Result: "Hello " + firstName,
+	}
+	return response, nil
+}
+
+func (*GreetServer) GreetWithDeadline(ctx context.Context, req *greetpb.GreetWithDeadlineRequest) (*greetpb.GreetWithDeadlineResponse, error) {
+	log.Printf("GreetWithDeadline function was invoked with: %v\n", req)
+
+	for i := 0; i < 3; i++ {
+		if ctx.Err() == context.Canceled {
+			log.Fatalln("The client canceled the resquest")
+			return nil, status.Errorf(codes.Canceled, "The client canceled the request")
+		}
+		time.Sleep(time.Second)
+	}
+
+	firstName := req.GetGreeting().GetFirstName()
+	response := &greetpb.GreetWithDeadlineResponse{
 		Result: "Hello " + firstName,
 	}
 	return response, nil
@@ -44,7 +81,7 @@ func (*GreetServer) GreetManyTimes(request *greetpb.GreetManyTimesRequest, strea
 	return nil
 }
 
-func (greetServer *GreetServer) LongGreet(stream greetpb.GreetService_LongGreetServer) error {
+func (*GreetServer) LongGreet(stream greetpb.GreetService_LongGreetServer) error {
 	log.Println("LongGreet function was invoked with a streaming request")
 
 	var result string
@@ -90,21 +127,4 @@ func (*GreetServer) GreetEveryone(stream greetpb.GreetService_GreetEveryoneServe
 		}
 	}
 	return nil
-}
-
-func main() {
-	greetServer := NewGreetServer("tcp", "0.0.0.0:50051")
-
-	listener, err := net.Listen(greetServer.Network, greetServer.Address)
-	if err != nil {
-		log.Fatalf("Failed to listen: %v", err)
-	}
-
-	server := grpc.NewServer()
-	greetpb.RegisterGreetServiceServer(server, greetServer)
-
-	log.Println("Serving in 0.0.0.0:5000")
-	if err := server.Serve(listener); err != nil {
-		log.Fatalf("Failed to server: %v", err)
-	}
 }
