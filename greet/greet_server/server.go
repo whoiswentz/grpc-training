@@ -58,11 +58,38 @@ func (greetServer *GreetServer) LongGreet(stream greetpb.GreetService_LongGreetS
 		}
 
 		if err != nil {
-			log.Fatalf("Error while reading client stream: %v", err)
+			log.Fatalf("Error while reading client stream: %v\n", err)
+			return err
 		}
 
 		result = "Hello, " + request.GetGreeting().GetFirstName() + " !"
 	}
+}
+
+func (*GreetServer) GreetEveryone(stream greetpb.GreetService_GreetEveryoneServer) error {
+	log.Println("GreetEveryone function was invoked with a streaming request")
+
+	for {
+		request, err := stream.Recv()
+
+		if err == io.EOF {
+			return nil
+		}
+
+		if err != nil {
+			log.Fatalf("Error while reading client stream: %v\n", err)
+			return err
+		}
+
+		firstName := request.GetGreeting().GetFirstName()
+		result := "Hello " + firstName + "! "
+
+		if err := stream.Send(&greetpb.GreetEveryoneResponse{Result: result}); err != nil {
+			log.Fatalf("Error while sending data to client: %v", err)
+			return err
+		}
+	}
+	return nil
 }
 
 func main() {

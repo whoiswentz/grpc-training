@@ -17,5 +17,6 @@
         <method importPath="grpc-training/greet/greetpb" receiver="GreetService_LongGreetClient" name="Send" />
       </methods>
     </inspection_tool>
+    <inspection_tool class="GoUnreachableCode" enabled="false" level="WARNING" enabled_by_default="false" />
   </profile>
 </component>
