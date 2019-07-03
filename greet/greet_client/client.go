@@ -33,10 +33,10 @@ func main() {
 
 	client := greetpb.NewGreetServiceClient(conn)
 
-	doUnary(client)
+	//doUnary(client)
 	//doServerStreaming(client)
 	//doClientStreaming(client)
-	//doBiDiStreaming(client)
+	doBiDiStreaming(client)
 
 	//doUnaryWithDeadline(client, 1 * time.Second)
 	//doUnaryWithDeadline(client, 6 * time.Second)

@@ -25,8 +25,8 @@ func main() {
 	//doUnary(client)
 	//doServerStreaming(client)
 	//doClientStreaming(client)
-	//_ = doBiDiStreaming(client)
-	doErrorUnarySquareRoot(client)
+	_ = doBiDiStreaming(client)
+	//doErrorUnarySquareRoot(client)
 }
 
 func doErrorUnarySquareRoot(client calculatorpb.CalculatorServiceClient) {
@@ -65,7 +65,7 @@ func doBiDiStreaming(client calculatorpb.CalculatorServiceClient) error {
 		waitChannel := make(chan struct{})
 
 		go func() {
-			numbers := []int32{13, 200, 31, 4, 1, 1, 70, 2}
+			numbers := []int32{13, 200, 31, 4, 1, 1, 70, 2, 500, 12, 1000}
 			for _, number := range numbers {
 				stream.Send(&calculatorpb.FindMaximumRequest{Number: number})
 				time.Sleep(time.Second)
