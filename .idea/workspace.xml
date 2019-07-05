@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f14b6a1-11ef-4677-8ca9-950014e41f01" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/blog/blog_client/client.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/blog_client/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/blog_server/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/blog_server/server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/blogpb/blog.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/generator.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/model/blog_item.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/blog_client/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/blog/blog_client/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/blog_server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/blog/blog_server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/blogpb/blog.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/blog/blogpb/blog.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/blogpb/blog.proto" beforeDir="false" afterPath="$PROJECT_DIR$/blog/blogpb/blog.proto" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,13 +31,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blog/blog_server/main.go">
+        <entry file="file://$PROJECT_DIR$/blog/blogpb/blog.proto">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="32" column="53" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="53" />
-              <folding>
-                <element signature="e#14#38#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -48,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/blog_server/server.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+            <state relative-caret-position="454">
+              <caret line="69" column="38" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="38" />
               <folding>
                 <element signature="e#14#210#0" expanded="true" />
               </folding>
@@ -58,40 +52,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/blog/model/blog_item.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blog/blog_client/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-              <folding>
-                <element signature="e#14#57#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="531">
+              <caret line="52" column="27" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blog/blog_client/client.go">
+        <entry file="file://$PROJECT_DIR$/blog/blogpb/blog.pb.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" selection-start-column="12" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blog/blogpb/blog.proto">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+            <state relative-caret-position="238">
+              <caret line="290" column="1" lean-forward="true" selection-start-line="290" selection-start-column="1" selection-end-line="290" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -114,6 +87,7 @@
       <find>Server</find>
       <find>Greet</find>
       <find>GreetEver</find>
+      <find>Document</find>
     </findStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go1.12.5.darwin-amd64" />
@@ -146,13 +120,13 @@
         <option value="$PROJECT_DIR$/calculator/calculator_client/client.go" />
         <option value="$PROJECT_DIR$/greet/generate.sh" />
         <option value="$PROJECT_DIR$/blog/generator.sh" />
-        <option value="$PROJECT_DIR$/blog/blogpb/blog.proto" />
         <option value="$PROJECT_DIR$/blog/blog_server/server/server.go" />
         <option value="$PROJECT_DIR$/blog/blog_client/client.go" />
-        <option value="$PROJECT_DIR$/blog/blog_client/main.go" />
         <option value="$PROJECT_DIR$/blog/blog_server/main.go" />
-        <option value="$PROJECT_DIR$/blog/blog_server/server.go" />
         <option value="$PROJECT_DIR$/blog/model/blog_item.go" />
+        <option value="$PROJECT_DIR$/blog/blogpb/blog.proto" />
+        <option value="$PROJECT_DIR$/blog/blog_client/main.go" />
+        <option value="$PROJECT_DIR$/blog/blog_server/server.go" />
       </list>
     </option>
   </component>
@@ -205,26 +179,7 @@
             </path>
             <path>
               <item name="grpc-training" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grpc-training" type="462c0819:PsiDirectoryNode" />
-              <item name="greet" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grpc-training" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grpc-training" type="462c0819:PsiDirectoryNode" />
-              <item name="greet" type="462c0819:PsiDirectoryNode" />
-              <item name="greet_client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grpc-training" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grpc-training" type="462c0819:PsiDirectoryNode" />
-              <item name="greet" type="462c0819:PsiDirectoryNode" />
-              <item name="greet_server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grpc-training" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grpc-training" type="462c0819:PsiDirectoryNode" />
-              <item name="greet" type="462c0819:PsiDirectoryNode" />
-              <item name="greetpb" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -270,6 +225,15 @@
     </option>
   </component>
   <component name="RunManager" selected="Go Build.go build grpc-training/blog/blog_client">
+    <configuration name="go build client.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="grpc-training" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/calculator/calculator_client/client.go" />
+      <package value="grpc-training" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build grpc-training/blog/blog_client" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="grpc-training" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -297,32 +261,22 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="grpc-training" />
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/blog/blog_server/main.go" />
+      <filePath value="$PROJECT_DIR$/calculator/calculator_server/server.go" />
       <package value="grpc-training" />
       <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go test blog_server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="grpc-training" />
-      <working_directory value="$PROJECT_DIR$/blog/blog_server" />
-      <framework value="gotest" />
-      <kind value="DIRECTORY" />
-      <package value="grpc-training" />
-      <directory value="$PROJECT_DIR$/blog/blog_server" />
-      <filePath value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build grpc-training/blog/blog_client" />
         <item itemvalue="Go Build.go build grpc-training/blog/blog_server" />
+        <item itemvalue="Go Build.go build client.go" />
+        <item itemvalue="Go Build.go build server.go" />
         <item itemvalue="Go Build.go build main.go (1)" />
-        <item itemvalue="Go Build.go build main.go" />
-        <item itemvalue="Go Test.go test blog_server" />
       </list>
     </recent_temporary>
   </component>
@@ -335,12 +289,12 @@
     <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23931624" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25763127" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3037433" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3037433" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -359,30 +313,6 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/blog/blog_server/server.go</url>
-          <line>38</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/blog/blog_server/server.go</url>
-          <line>31</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/blog/blog_server/server.go</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/stream/greet-many-times/generate.sh" />
     <entry file="file://$PROJECT_DIR$/stream/greet-many-times/greetmanypb/greet-many-times.proto" />
@@ -398,13 +328,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/calculator/calculatorpb/calculator.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
         </state>
       </provider>
     </entry>
@@ -425,13 +348,6 @@
     <entry file="file://$PROJECT_DIR$/greet/greet_server/main.go" />
     <entry file="file://$PROJECT_DIR$/greet/greetpb/greeteveryonerequest.js" />
     <entry file="file://$PROJECT_DIR$/greet/greet_client/client.js" />
-    <entry file="file://$PROJECT_DIR$/blog/generator.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="53" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/greet/generate.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -484,31 +400,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calculator/calculator_server/server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="98" column="74" selection-start-line="98" selection-start-column="68" selection-end-line="98" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/calculator/calculator_client/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/greet/greetpb/greet.pb.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="223" column="16" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blog/blogpb/blog.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -526,17 +421,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../go.mongodb.org/mongo-driver/mongo/collection.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="297" column="60" selection-start-line="297" selection-start-column="60" selection-end-line="297" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../go.mongodb.org/mongo-driver/mongo/results.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/blog_server/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
@@ -547,47 +442,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/blog_server/main.go">
+    <entry file="file://$PROJECT_DIR$/calculator/calculator_server/server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="32" column="53" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="53" />
-          <folding>
-            <element signature="e#14#38#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="858">
+          <caret line="98" column="74" selection-start-line="98" selection-start-column="68" selection-end-line="98" selection-end-column="74" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/blog_client/main.go">
+    <entry file="file://$PROJECT_DIR$/calculator/calculator_client/client.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-          <folding>
-            <element signature="e#14#57#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calculator/calculatorpb/calculator.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="62" column="27" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/generator.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/blogpb/blog.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../go.mongodb.org/mongo-driver/bson/bson.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../go.mongodb.org/mongo-driver/mongo/collection.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="1086" column="24" selection-start-line="1086" selection-start-column="24" selection-end-line="1086" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/model/blog_item.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/blogpb/blog.pb.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        <state relative-caret-position="238">
+          <caret line="290" column="1" lean-forward="true" selection-start-line="290" selection-start-column="1" selection-end-line="290" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/blog_server/server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        <state relative-caret-position="454">
+          <caret line="69" column="38" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="38" />
           <folding>
             <element signature="e#14#210#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blog/model/blog_item.go">
+    <entry file="file://$PROJECT_DIR$/blog/blog_client/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+        <state relative-caret-position="531">
+          <caret line="52" column="27" selection-start-line="52" selection-start-column="11" selection-end-line="52" selection-end-column="27" />
         </state>
       </provider>
     </entry>
