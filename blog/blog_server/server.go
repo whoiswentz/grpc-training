@@ -109,6 +109,9 @@ func (*BlogServer) UpdateBlog(context context.Context, request *blogpb.UpdateBlo
 	}, nil
 }
 
+// Delete blog RPC
+// Receives a context and a DeleteBlogRequest
+// Returns a DeleteBlogResponse and an Error
 func (*BlogServer) DeleteBlog(context context.Context, request *blogpb.DeleteBlogRequest) (*blogpb.DeleteBlogResponse, error) {
 	log.Println("Delete Blog Request")
 
@@ -129,4 +132,41 @@ func (*BlogServer) DeleteBlog(context context.Context, request *blogpb.DeleteBlo
 	}
 
 	return &blogpb.DeleteBlogResponse{BlogId: request.GetBlogId()}, nil
+}
+
+// ListBlog RPC
+// Uses server streaming to send the blogs back to the client
+func (*BlogServer) ListBlog(request *blogpb.ListBlogRequest, server blogpb.BlogService_ListBlogServer) error {
+	log.Println("List Blog RPC Called - Using Server Streaming")
+
+	cursor, err := collection.Find(context.Background(), nil)
+	if err != nil {
+		return status.Errorf(codes.Internal, fmt.Sprintf("Unknow internal error: %v\n", err))
+	}
+	defer cursor.Close(context.Background())
+
+	for cursor.Next(context.Background()) {
+		blog := &model.BlogItem{}
+		if err := cursor.Decode(blog); err != nil {
+			return status.Errorf(codes.Internal, fmt.Sprintf("Error while decoding data from MongoDB: %v\n", err))
+		}
+
+		listBlogResponse := &blogpb.ListBlogResponse{
+			Blog: &blogpb.Blog{
+				Id:       blog.ID.Hex(),
+				AuthorId: blog.AuthorID,
+				Title:    blog.Title,
+				Content:  blog.Content,
+			},
+		}
+
+		if err := server.Send(listBlogResponse); err != nil {
+			return status.Errorf(codes.DataLoss, fmt.Sprintf("Error while streaming to client: %v\n", err))
+		}
+
+		if err := cursor.Err(); err != nil {
+			return status.Errorf(codes.Internal, fmt.Sprintf("Unknow internal error: %v\n", err))
+		}
+	}
+	return nil
 }
