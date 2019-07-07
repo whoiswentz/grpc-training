@@ -22,27 +22,45 @@ func main() {
 
 	client := blogpb.NewBlogServiceClient(clientConn)
 
-	createdBlog := CreateBlog(client)
-	log.Println(createdBlog)
-
-	readedBlog := ReadBlog(createdBlog, client)
-	log.Println(readedBlog)
-}
-
-func CreateBlog(client blogpb.BlogServiceClient) *blogpb.CreateBlogResponse {
+	// CREATE
 	blog := &blogpb.Blog{
 		AuthorId: "Vinicios Wentz",
 		Title:    "gRPC Awesomeness",
 		Content:  "A lot of text about gRPC",
 	}
-	response, err := client.CreateBlog(context.Background(), &blogpb.CreateBlogRequest{Blog: blog})
+	createdBlog := createBlog(blog, client)
+	log.Printf("Created Blof: %v\n", createdBlog)
+
+	// READ
+	readedBlog := readBlog(createdBlog, client)
+	log.Printf("Readed Blog: %v\n", readedBlog)
+
+	// UPDATE
+	updatedBlog := &blogpb.Blog{
+		Id:       readedBlog.GetBlog().GetId(),
+		AuthorId: "Vinicios Henrique Wentz",
+		Title:    "gRPC Awesomeness 2019 UPDATED",
+		Content:  "A lot of text about gRPC in 2019",
+	}
+	newUpdatedBlog := updateBlog(updatedBlog, client)
+	log.Printf("Updated Blog: %v\n", newUpdatedBlog)
+
+	// DELETE
+	deleteRequest := &blogpb.DeleteBlogRequest{BlogId: newUpdatedBlog.GetBlog().GetId()}
+	deleteResult := deleteBlog(deleteRequest, client)
+	log.Printf("Blog was deleted: %v\n", deleteResult)
+}
+
+func createBlog(blog *blogpb.Blog, client blogpb.BlogServiceClient) *blogpb.CreateBlogResponse {
+	request := &blogpb.CreateBlogRequest{Blog: blog}
+	response, err := client.CreateBlog(context.Background(), request)
 	if err != nil {
 		log.Fatalf("%v\n", err)
 	}
 	return response
 }
 
-func ReadBlog(response *blogpb.CreateBlogResponse, client blogpb.BlogServiceClient) interface{} {
+func readBlog(response *blogpb.CreateBlogResponse, client blogpb.BlogServiceClient) *blogpb.ReadBlogResponse {
 	blogId := response.GetBlog().GetId()
 
 	readBLogRequest := &blogpb.ReadBlogRequest{BlogId: blogId}
@@ -51,4 +69,21 @@ func ReadBlog(response *blogpb.CreateBlogResponse, client blogpb.BlogServiceClie
 		log.Fatalf("%v\n", err)
 	}
 	return readBlogResponse
+}
+
+func updateBlog(blogToUpdate *blogpb.Blog, client blogpb.BlogServiceClient) *blogpb.UpdateBlogResponse {
+	request := &blogpb.UpdateBlogRequest{Blog: blogToUpdate}
+	updateResponse, err := client.UpdateBlog(context.Background(), request)
+	if err != nil {
+		log.Fatalf("%v\n", err)
+	}
+	return updateResponse
+}
+
+func deleteBlog(blogToDelete *blogpb.DeleteBlogRequest, client blogpb.BlogServiceClient) *blogpb.DeleteBlogResponse {
+	deleteResult, err := client.DeleteBlog(context.Background(), blogToDelete)
+	if err != nil {
+		log.Printf("Error happened while deleting: %v\n", err)
+	}
+	return deleteResult
 }
